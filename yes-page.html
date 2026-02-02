@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Yes! Valentine</title>
+    <style>
+        .celebration {
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+        
+        .celebration h1 {
+            color: #e91e63;
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+        
+        .love-text {
+            color: #d81b60;
+            font-size: 2.5em;
+            margin: 20px 0;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), 0 0 10px #ff1493; }
+            to { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), 0 0 20px #ff69b4, 0 0 30px #ff69b4; }
+        }
+        
+        .couple-image-container {
+            margin: 30px 0;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .couple-image {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.3);
+            border: 5px solid white;
+            transition: all 0.3s ease;
+        }
+        
+        .couple-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(233, 30, 99, 0.5);
+        }
+        
+        .couple-image:active {
+            transform: scale(0.98);
+        }
+        
+        .click-hint {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: bold;
+            opacity: 0;
+            animation: fadeInOut 3s infinite;
+            white-space: nowrap;
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        
+        .heart-animation {
+            font-size: 3em;
+            animation: heartbeat 1s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .message {
+            font-size: 1.5em;
+            color: #c2185b;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        
+        .special-effects {
+            position: relative;
+            height: 60px;
+            margin: 20px 0;
+        }
+        
+        .floating-hearts {
+            position: absolute;
+            font-size: 2em;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0.8;
+        }
+        
+        .floating-hearts:nth-child(1) {
+            left: 20%;
+            animation-delay: 0s;
+        }
+        
+        .floating-hearts:nth-child(2) {
+            left: 50%;
+            animation-delay: 1s;
+        }
+        
+        .floating-hearts:nth-child(3) {
+            left: 80%;
+            animation-delay: 2s;
+        }
+        
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.8;
+            }
+            50% { 
+                transform: translateY(-20px) rotate(10deg);
+                opacity: 1;
+            }
+        }
+        
+        .romantic-timeline {
+            margin-top: 40px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.3), rgba(255, 105, 180, 0.2));
+            border-radius: 20px;
+            border: 2px solid rgba(255, 105, 180, 0.3);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.2);
+        }
+        
+        .romantic-timeline h3 {
+            text-align: center;
+            color: #d81b60;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-family: 'Georgia', serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-item {
+            background: white;
+            margin: 12px 0;
+            padding: 12px 18px;
+            border-radius: 15px;
+            font-size: 1.1em;
+            color: #c2185b;
+            font-weight: 500;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid #ff69b4;
+        }
+        
+        .timeline-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 6px 18px rgba(255, 105, 180, 0.3);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="hearts-background"></div>
+    <main class="celebration">
+        <div class="heart-animation">❤️</div>
+        <h2 class="love-text">I Love You 💕</h2>
+        <div class="special-effects">
+            <div class="floating-hearts">💕</div>
+            <div class="floating-hearts">💖</div>
+            <div class="floating-hearts">💗</div>
+        </div>
+        <div class="couple-image-container" onclick="changeButtonText()">
+            <img src="https://i.pinimg.com/originals/15/3c/59/153c59185cc57bf81b69c4a0e692eaae.gif" alt="Romantic Couple" class="couple-image">
+            <div id="imageClickText" class="click-hint">💕 Click me 💕</div>
+        </div>
+        <div class="romantic-timeline">
+            <h3>Our Love Story 💝</h3>
+            <div class="timeline-item">First meeting - ✨ Magic moment</div>
+            <div class="timeline-item">First date - 🌹 Perfect evening</div>
+            <div class="timeline-item">First "I love you" - 💕 Forever began</div>
+            <div class="timeline-item">Today - 💖 Saying YES to forever!</div>
+        </div>
+    </main>
+
+    <script>
+        function createHearts() {
+            const heartsContainer = document.querySelector('.hearts-background');
+            for (let i = 0; i < 100; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        const buttonTexts = [
+            "You're amazing! 💕",
+            "I love you more! �",
+            "Forever yours! �",
+            "My everything! �",
+            "Perfect match! 🌹",
+            "Dream come true! ✨",
+            "My heart is yours! 💓",
+            "Together forever! 💕"
+        ];
+        
+        let currentTextIndex = 0;
+        
+        function changeButtonText() {
+            const clickText = document.getElementById('imageClickText');
+            currentTextIndex = (currentTextIndex + 1) % buttonTexts.length;
+            clickText.textContent = buttonTexts[currentTextIndex];
+            
+            // Add animation effect
+            clickText.style.transform = 'translateX(-50%) scale(1.2)';
+            setTimeout(() => {
+                clickText.style.transform = 'translateX(-50%) scale(1)';
+            }, 300);
+        }
+        
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+
+        createHearts();
+    </script>
+</body>
+</html>

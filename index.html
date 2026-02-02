@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>valentine</title>
+    <style>
+        .romantic-message {
+            margin-top: 30px;
+            font-size: 1.3em;
+            color: #d81b60;
+            font-weight: bold;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            font-family: 'Dancing Script', cursive;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            line-height: 1.4;
+        }
+
+        .dream-paragraph {
+            font-size: 1.2em;
+            color: #d81b60;
+            margin: 30px 0 0 0;
+            font-weight: 500;
+            font-style: italic;
+            text-align: center;
+            font-family: 'Georgia', serif;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        button {
+            background: linear-gradient(45deg, #e91e63, #c2185b);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 18px 45px;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            min-width: 120px;
+            max-width: 120px;
+            text-align: center;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        button:hover::before {
+            left: 100%;
+        }
+        
+        button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(233, 30, 99, 0.6);
+            background: linear-gradient(45deg, #d81b60, #ad1457);
+        }
+        
+        button:active {
+            transform: translateY(-1px) scale(0.98);
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
+        }
+        
+        #yesBtn {
+            background: linear-gradient(45deg, #ff4081, #f50057);
+            box-shadow: 0 8px 25px rgba(255, 64, 129, 0.4);
+        }
+        
+        #yesBtn:hover {
+            background: linear-gradient(45deg, #f50057, #c51162);
+            box-shadow: 0 12px 35px rgba(255, 64, 129, 0.6);
+        }
+        
+        #yesBtn:active {
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
+        }
+        
+        .big-love-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 5em;
+            font-weight: 900;
+            color: #e91e63;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            font-family: 'Georgia', serif;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        
+        .big-love-text.animate {
+            animation: bigLoveAnimation 2s ease-out forwards;
+        }
+        
+        @keyframes bigLoveAnimation {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2) rotate(5deg);
+                opacity: 1;
+            }
+            70% {
+                transform: translate(-50%, -50%) scale(1) rotate(-2deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-background"></div>
+    <main>
+        <h1 style="font-weight: bold;">Riya</h1>
+        <h1>Will you be my Valentine ?</h1>
+        <div class="buttons">
+            <button id="yesBtn">YES</button>
+            <button id="noBtn">NO</button>
+        </div>
+        <div id="romanticMessage" class="romantic-message"></div>
+        <div id="bigLoveText" class="big-love-text">I LOVE YOU</div>
+        <p class="dream-paragraph">Every moment with you feels like a dream come true...</p>
+    </main>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const romanticMessage = document.getElementById('romanticMessage');
+        
+        const noButtonTexts = [
+            "Really? 😊",
+            "Think again! 💕",
+            "Are you sure? 💖",
+            "Last chance! 💗",
+            "Don't do it! 💝",
+            "Say YES! 🌹",
+            "Please say yes! ✨",
+            "I'm waiting! 💓"
+        ];
+        
+        let currentNoTextIndex = 0;
+        
+        // Navigate to yes page when YES is clicked
+        yesBtn.addEventListener('click', function() {
+            const bigLoveText = document.getElementById('bigLoveText');
+            
+            // Show big I LOVE YOU animation
+            bigLoveText.classList.add('animate');
+            
+            // Navigate after animation completes
+            setTimeout(() => {
+                window.location.href = 'yes-page.html';
+            }, 2000);
+        });
+        
+        const romanticMessages = [
+            "Really nice try! 😊 But I know you want to say yes...",
+            "Your smile is my favorite thing in the world! 💕",
+            "Every moment with you feels like magic! ✨",
+            "You make my heart skip a beat! 💓",
+            "I fall for you more every single day! 🌹",
+            "You're my sunshine on cloudy days! ☀️",
+            "Being with you is the best part of my life! 💖",
+            "You're absolutely perfect just as you are! 🌟",
+            "I can't imagine my life without you! 💝",
+            "You complete me in every way! 💕"
+        ];
+        
+        function showRomanticMessage() {
+            const randomMessage = romanticMessages[Math.floor(Math.random() * romanticMessages.length)];
+            romanticMessage.textContent = randomMessage;
+            romanticMessage.style.opacity = '1';
+            romanticMessage.style.transform = 'translateY(0)';
+            
+            setTimeout(() => {
+                romanticMessage.style.opacity = '0';
+                romanticMessage.style.transform = 'translateY(20px)';
+            }, 3000);
+        }
+        
+        function moveButtonToRandomPosition() {
+            const randomX = Math.random() * (window.innerWidth - 100);
+            const randomY = Math.random() * (window.innerHeight - 50);
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+        
+        // Change NO button text on click
+        noBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            currentNoTextIndex = (currentNoTextIndex + 1) % noButtonTexts.length;
+            noBtn.textContent = noButtonTexts[currentNoTextIndex];
+            
+            // Add animation effect
+            noBtn.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                noBtn.style.transform = 'scale(1)';
+            }, 200);
+            
+            // Show romantic message below after a few clicks
+            if (currentNoTextIndex >= 3) {
+                showRomanticMessage();
+            }
+        });
+        
+        // Move on mouseover
+        noBtn.addEventListener('mouseover', function() {
+            moveButtonToRandomPosition();
+        });
+        
+        // Move on mousemove (when cursor approaches)
+        document.addEventListener('mousemove', function(e) {
+            const rect = noBtn.getBoundingClientRect();
+            const btnCenterX = rect.left + rect.width / 2;
+            const btnCenterY = rect.top + rect.height / 2;
+            
+            const distanceX = e.clientX - btnCenterX;
+            const distanceY = e.clientY - btnCenterY;
+            const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+            
+            // Move button if cursor is within 150px
+            if (distance < 150) {
+                moveButtonToRandomPosition();
+            }
+        });
+
+        // Create hearts background
+        function createHearts() {
+            const heartsContainer = document.querySelector('.hearts-background');
+            for (let i = 0; i < 50; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        createHearts();
+    </script>
+</body>
+</html>
